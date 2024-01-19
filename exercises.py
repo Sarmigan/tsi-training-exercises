@@ -283,11 +283,25 @@ if __name__ == '__main__':
     #################
 
     import json
+    import csv
 
-    f = open("fruits.json")
+    json_file = open("fruits.json", "r") 
 
-    data = json.load(f)
+    data = json.load(json_file)
 
-    print(data)
+    json_file.close()
 
+    csv_file = open("fruits.csv", "w")
+    csv_writer = csv.writer(csv_file)
+
+    index = 0    
+    for item in data:
+        if index == 0:
+            header = item.keys()
+            csv_writer.writerow(header)
+            index += 1
+
+        csv_writer.writerow(item.values())
+    
+    csv_file.close()
 
